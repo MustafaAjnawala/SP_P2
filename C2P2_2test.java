@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class C2P2_2test {
 
-     // Global NTab to store symbol names and addresses
      static List<List<String>> NTab = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -123,7 +122,6 @@ public class C2P2_2test {
             String lcLine = lc + " " + line;
             objList.set(i, lcLine);
 
-            // Check if the line is address-sensitive
             if (firstAddressSensitiveLine || line.contains("BC") || line.contains("JL") ||line.contains("LDA")) {
                 relocList.add(String.valueOf(lc));  // Add to reloc list if it's address-sensitive
                 firstAddressSensitiveLine = false;
@@ -181,16 +179,15 @@ public class C2P2_2test {
             String type = row.get(1);
 
             if (type.equals("PD") && line.startsWith(symbolName + ":DC")) {
-                row.set(2, Integer.toString(lc));  // Update TranslatedAddr for PD symbol where it's defined
+                row.set(2, Integer.toString(lc));  
             } else if (type.equals("EXT") && line.contains(symbolName)) {
-                row.set(2, Integer.toString(lc));  // Update TranslatedAddr for EXT symbol where it's used
+                row.set(2, Integer.toString(lc)); 
             }
         }
     }
 
     // Populate NTab with each object's symbols and their addresses based on the RF
     private static void populateNTab(String objName, int rf, List<List<String>> linkTab) {
-        // Add object name and linking address as the first row
         List<String> objRow = new ArrayList<>();
         
         if(objName.equals("obj1")){
